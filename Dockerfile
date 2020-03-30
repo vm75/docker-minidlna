@@ -1,10 +1,13 @@
-FROM alpine:3.6
-MAINTAINER nownabe <nownabe@gmail.com>
+FROM alpine:3.10
+MAINTAINER vm75 <vm75dev@gmail.com>
 
-RUN apk --update --no-cache add minidlna \
-  && mkdir -p /opt \
-  && chown minidlna. /opt
+RUN apk --update --no-cache add minidlna tini \
+  && mkdir -p /mnt/readymedia/Music /mnt/readymedia/Videos /mnt/readymedia/Pictures /mnt/readymedia/.cache \
+  && chown -R minidlna:minidlna /mnt/readymedia
 
-ADD minidlna.conf /etc/minidlna.conf
+COPY readymedia.conf /etc/minidlna.conf
+COPY readymedia.sh /
 
-CMD minidlnad -d
+EXPOSE 8200/tcp 1900/udp
+
+CMD ["/readymedia.sh"]
