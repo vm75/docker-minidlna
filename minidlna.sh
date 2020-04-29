@@ -1,5 +1,4 @@
-#!/bin/sh -x
-
+#!/bin/sh
 # Copyright (c) 2020 vm75 <vm75dev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,19 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# ReadyMedia container may fail to restart, because a previous lock may exist:
+# MiniDLNA container may fail to restart, because a previous lock may exist:
 # let's shoot it!
 /bin/rm -rf /var/run/minidlna
 
 CONF_FILE=/etc/minidlna.conf
 
-for SETTING in $(env); do
-  if [[ "${SETTING:0:11}" = READYMEDIA_ ]]; then
-    key=$(echo "${SETTING}" | sed -r "s/READYMEDIA_(.*)=.*/\\1/g" | tr '[:upper:]' '[:lower:]')
+for SETTING in $(env) ; do
+  if [[ "${SETTING:0:11}" = MINIDLNA_ ]]; then
+    key=$(echo "${SETTING}" | sed -r "s/MINIDLNA_(.*)=.*/\\1/g" | tr '[:upper:]' '[:lower:]')
     value=$(echo "${SETTING}" | sed -r "s/.*=(.*)/\\1/g")
 
     case ${key} in
-    user | friendly_name | serial | model_number | max_connections | strict_dlna | notify_interval | enable_tivo | tivo_discovery)
+    user | friendly_name | serial | model_number | max_connections | strict_dlna | notify_interval | enable_tivo | tivo_discovery | transcode_* )
         /bin/sed "s/^${key}=.*/${key}=${value}/" -i ${CONF_FILE}
         ;;
     album_art_names)   # append

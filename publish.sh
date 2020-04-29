@@ -1,7 +1,7 @@
 # tag artifact
-#docker tag pi-readymedia vm75/pi-readymedia:1.0
-docker tag pi-readymedia vm75/pi-readymedia:latest
+#docker tag minidlna vm75/minidlna:1.0
+docker tag minidlna vm75/minidlna:latest
 
 # push artifact
-docker push vm75/pi-readymedia:latest
-#docker push vm75/pi-readymedia:1.0
+docker push vm75/minidlna:latest
+#docker push vm75/minidlna:1.0
