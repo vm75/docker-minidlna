@@ -21,7 +21,7 @@
 CONF_FILE=/etc/minidlna.conf
 
 for SETTING in $(env) ; do
-  if [[ "${SETTING:0:11}" = MINIDLNA_ ]]; then
+  if [[ "${SETTING:0:9}" = MINIDLNA_ ]]; then
     key=$(echo "${SETTING}" | sed -r "s/MINIDLNA_(.*)=.*/\\1/g" | tr '[:upper:]' '[:lower:]')
     value=$(echo "${SETTING}" | sed -r "s/.*=(.*)/\\1/g")
 
