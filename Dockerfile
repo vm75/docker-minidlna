@@ -14,7 +14,7 @@ COPY --from=builder /minidlna/minidlnad /usr/local/bin
 COPY minidlna.conf /etc/minidlna.conf
 COPY minidlna.sh /
 
-RUN	apk add --no-cache libexif libid3tag libvorbis sqlite-libs jpeg flac gettext-libs imagemagick-libs ffmpeg mplayer \
+RUN	apk add --no-cache libexif libid3tag libvorbis sqlite-libs jpeg flac gettext-libs imagemagick-libs ffmpeg \
 	&& mkdir -p /mnt/minidlna/config /mnt/minidlna/Music /mnt/minidlna/Videos /mnt/minidlna/Pictures /mnt/minidlna/.cache
 
 EXPOSE 8200/tcp 1900/udp
