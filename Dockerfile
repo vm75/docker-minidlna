@@ -1,11 +1,11 @@
 FROM alpine:3.11 as builder
 
 RUN apk update --no-cache \
-	&& apk add --no-cache git g++ bsd-compat-headers autoconf automake pkgconf make libexif-dev libid3tag-dev libvorbis-dev sqlite-dev ffmpeg-dev imagemagick-dev jpeg-dev flac-dev gettext gettext-dev \
-	&& git clone https://github.com/vm75/minidlna.git \
-	&& cd minidlna && git checkout dev \
+	&& apk add --no-cache git g++ bsd-compat-headers autoconf automake pkgconf make libexif-dev libid3tag-dev libvorbis-dev sqlite-dev ffmpeg-dev imagemagick-dev jpeg-dev flac-dev gettext gettext-dev zlib-dev \
+	&& git clone https://git.code.sf.net/p/minidlna/git minidlna \
+	&& cd minidlna \
 	&& ./autogen.sh \
-	&& ./configure --enable-tivo --prefix=/usr --with-db-path=/var/lib/minidlna --with-log-path=/var/log/minidlna \
+	&& ./configure --prefix=/usr --with-db-path=/var/lib/minidlna --with-log-path=/var/log/minidlna \
 	&& make
 
 FROM alpine:3.11

@@ -41,4 +41,4 @@ for SETTING in $(env) ; do
   fi
 done
 
-minidlnad -d -f ${CONF_FILE}
+minidlnad -S -f ${CONF_FILE}
